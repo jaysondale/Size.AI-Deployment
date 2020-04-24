@@ -30,7 +30,6 @@ def upload_file():
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         prediction = get_prediction(file) # Change this to 'file' PATH - ensure format
-
         return render_template('result.html', Prediction=prediction, File=filename) # Pass in the prediction
     return render_template('index.html')
 
