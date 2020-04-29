@@ -5,18 +5,18 @@ from commons import get_model
 # Custom Imports 
 import numpy as np
 import PIL.Image as Image
-import torchvision.transforms.functional as F
+from torchvision import transforms
+import matplotlib.pyplot as plt
 
 # Access commons
 model = get_model()
-
+# Standard RGB transform
+transform=transforms.Compose([transforms.ToTensor(),transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),])
 def get_prediction(file):
-    img = 255.0 * F.to_tensor(Image.open(file).convert('RGB'))
-    img[0,:,:]=img[0,:,:]-92.8207477031
-    img[1,:,:]=img[1,:,:]-95.2757037428
-    img[2,:,:]=img[2,:,:]-104.877445883
+    img = transform(Image.open(file).convert('RGB'))
     img = img.cpu()
     output = model(img.unsqueeze(0))
     prediction = int(output.detach().cpu().sum().numpy())
-    print("Predicted Count : ",int(output.detach().cpu().sum().numpy())) # Output the prediction
+    # Save image
+    plt.imsave('static/density_map.jpg', output.detach().cpu().numpy()[0][0])
     return prediction

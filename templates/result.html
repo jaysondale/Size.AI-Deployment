@@ -27,6 +27,17 @@
             font-family: "Arial";
         }
 
+        h3 {
+          color: rgba(0, 0, 0, 0.79);
+          font-family: "Arial Black", Gadget, sans-serif;
+          font-weight: bold;
+        }
+
+        #density {
+          width: 30%;
+          height: auto;
+        }
+
         #custom-button {
             font-family: Arial;
             margin-bottom: 5px;
@@ -58,6 +69,11 @@
         <h2 class="h5 mb-3 font-weight-normal"><i>{{Prediction}}</i></h2>
         <br>
         <div>
+          <h3>Density Map</h3>
+          <img src="{{ url_for('static', filename='density_map.jpg')}}" id="density">
+        </div>
+        <div>
+          <h3>Image</h3>
             <img src="{{ url_for('static', filename=File)}}" id="crowd">
         </div>
         <br>

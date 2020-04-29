@@ -27,7 +27,7 @@
         }
 
         p {
-          color: rgba(93,43,255,0.69);
+          color: rgba(0, 0, 0, 0.79);
           font-family: "Arial Black", Gadget, sans-serif;
         }
 
@@ -132,7 +132,14 @@
                     alert("File exceeds maximum memory allowance of 100kb.");
                     realFileBtn.value = "";
                   } else {
-                    customTxt.innerHTML = "Crowd Image: " + realFileBtn.value.match(/[\/\\]([\w\d\s.\=\(\)]+)$/)[1];
+                    // Check extensions
+                    let ext = realFileBtn.value.split('.').pop();
+                    if (ext != "jpg" && ext != "jpeg") {
+                      alert("Invalid file type: " + ext + ". File must be either .jpg or .jpeg formats");
+                      realFileBtn.value = "";
+                    } else {
+                      customTxt.innerHTML = "Crowd Image: " + realFileBtn.value.match(/[\/\\]([\w\d\s.\=\(\)]+)$/)[1];
+                    }
                   }
                 } else {
                   customTxt.innerHTML = "Image must be under 100kb";

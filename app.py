@@ -5,7 +5,7 @@ from inference import get_prediction
 from werkzeug.utils import secure_filename
 
 UPLOAD_FOLDER = './static/'
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+ALLOWED_EXTENSIONS = set(['.jpg', '.jpeg'])
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -15,7 +15,7 @@ def upload_file():
     if request.method == 'POST':
         # Remove existing images in directory
         files_in_dir = os.listdir(app.config['UPLOAD_FOLDER'])
-        filtered_files = [file for file in files_in_dir if file.endswith(".jpg")]
+        filtered_files = [file for file in files_in_dir if file.endswith(".jpg") or file.endswith(".jpeg")]
         for file in filtered_files:
             path = os.path.join(app.config['UPLOAD_FOLDER'], file)
             os.remove(path)
@@ -24,8 +24,10 @@ def upload_file():
         if 'file' not in request.files:
             return redirect(request.url)
         file = request.files['file']
+
         if not file:
             return
+        
         print("GETTING PREDICTION")
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
