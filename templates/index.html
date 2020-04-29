@@ -23,7 +23,12 @@
         h1 {
             color: rgba(11, 47, 57, 0.85);
             font-family: "Arial Black", Gadget, sans-serif;
-            padding-bottom: 10px;
+            padding-bottom: 3px;
+        }
+
+        p {
+          color: rgba(93,43,255,0.69);
+          font-family: "Arial Black", Gadget, sans-serif;
         }
 
         #Line {
@@ -98,11 +103,12 @@
 
         <input type="file" name="file" class="form-control-file" id="input-file" hidden="hidden" />
           <button type="button" id="custom-button"> <b> Choose a crowd </b> </button>
-          <div id="custom-text"> <i> No crowd uploaded </i></div>
+          <div id="custom-text"> <i> Image must be under 100kb </i></div>
 
         <br>
         <button class="btn btn-primary btn-sm" type="submit" id="upload-file" hidden="hidden">Upload</button>
         <a class="gradient-button gradient-button-1" id="fancy-button">Count</a>
+        <p>Download test images: <a href="https://drive.google.com/drive/folders/1Ip-fK3O93_YzYqO1fywvFFucL8N_yncC?usp=sharing">Dataset</a></p>
 
         <script type="text/javascript">
             const realFileBtn = document.getElementById("input-file");
@@ -129,7 +135,7 @@
                     customTxt.innerHTML = "Crowd Image: " + realFileBtn.value.match(/[\/\\]([\w\d\s.\=\(\)]+)$/)[1];
                   }
                 } else {
-                  customTxt.innerHTML = "No crowd uploaded.";
+                  customTxt.innerHTML = "Image must be under 100kb";
                 }
             });
 
