@@ -7,6 +7,7 @@ import numpy as np
 import PIL.Image as Image
 from torchvision import transforms
 import matplotlib.pyplot as plt
+import random
 
 # Access commons
 model = get_model()
@@ -17,6 +18,7 @@ def get_prediction(file):
     img = img.cpu()
     output = model(img.unsqueeze(0))
     prediction = int(output.detach().cpu().sum().numpy())
-    # Save image
-    plt.imsave('static/density_map.jpg', output.detach().cpu().numpy()[0][0])
-    return prediction
+    x = random.randint(1,100000) 
+    density = 'static/density_map'+str(x)+'.jpg' 
+    plt.imsave(density, output.detach().cpu().numpy()[0][0]) 
+    return prediction, density

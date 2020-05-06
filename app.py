@@ -31,8 +31,8 @@ def upload_file():
         print("GETTING PREDICTION")
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        prediction = get_prediction(file) # Change this to 'file' PATH - ensure format
-        return render_template('result.html', Prediction=prediction, File=filename) # Pass in the prediction
+        prediction, density = get_prediction(file)
+        return render_template('result.html', Prediction=prediction, File=filename, Density=density) 
     return render_template('index.html')
 
 
