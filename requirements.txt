@@ -1,4 +1,4 @@
-Flask==1.0.3
+Flask==2.3.2
 torchvision==0.2.1
 numpy==1.16.4
 Pillow==6.2.0
